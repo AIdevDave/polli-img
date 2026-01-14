@@ -320,7 +320,7 @@ The script provides clear error messages:
 
 ## API Documentation
 
-For full API documentation, see [APIDOCS.md](APIDOCS.md) or visit:
+For full API documentation, see [APIDOCS.md](https://github.com/pollinations/pollinations/blob/main/APIDOCS.md) or visit:
 - [Pollinations.ai API Docs](https://gen.pollinations.ai/docs)
 - [Get API Key](https://enter.pollinations.ai)
 
