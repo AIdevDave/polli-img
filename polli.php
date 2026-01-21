@@ -56,6 +56,7 @@ function polli($options = []) {
         'width' => null,
         'height' => null,
         'resolution' => null,
+        'quality'=>'high',
         'aspect' => null, // 'portrait', 'landscape', 'square'
         'format' => 'png',
         'output' => null,
@@ -69,6 +70,10 @@ function polli($options = []) {
     ];
     
     $options = array_merge($defaults, $options);
+
+    if ($options['seed'] === null || $options['seed'] === '') {
+        $options['seed'] = random_int(0, 2147483647);
+    }
     
     // Validate API key
     if (empty($options['api_key'])) {
@@ -91,13 +96,13 @@ function polli($options = []) {
         switch ($options['aspect']) {
             case 'portrait':
             case 'P':
-                $options['width'] = 768;
-                $options['height'] = 1024;
+                $options['width'] = 720;
+                $options['height'] = 1280;
                 break;
             case 'landscape':
             case 'L':
-                $options['width'] = 1024;
-                $options['height'] = 768;
+                $options['width'] = 1280;
+                $options['height'] = 720;
                 break;
             case 'square':
             case 'S':
@@ -135,7 +140,7 @@ function polli($options = []) {
         $params['height'] = $options['height'];
     }
     
-    if ($options['seed']) {
+    if ($options['seed'] !== null && $options['seed'] !== '') {
         $params['seed'] = $options['seed'];
     }
     
@@ -339,7 +344,7 @@ Options:
   -R, --resolution WxH   Custom resolution (e.g., 1280x720)
   -o, --output PATH      Output file path (default: ./img_YYYYMMDD_HHMMSS.png)
   -f, --format FORMAT    Image format: png (default) or jpg
-  --seed NUMBER          Seed for reproducibility
+  --seed NUMBER          Seed for reproducibility (default: random)
   --enhance              Enhance prompt
   --safe                 Enable safe mode
   --list-models          List available models
@@ -385,6 +390,7 @@ if (php_sapi_name() === 'cli') {
         'prompt' => '',
         'model' => 'flux',
         'aspect' => null,
+        'quality'=>'high',
         'resolution' => null,
         'output' => null,
         'format' => 'png',
